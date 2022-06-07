@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Subjects list</title>
+
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <!--  bootstrap  -->
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css">
+    <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--  datatables  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <div th:insert="fragments/sidebar :: sidebar"></div>
+    </div>
+    <div id="page-content-wrapper">
+        <div id="page-content">
+            <div class="row">
+                <div class="col-md-12 main-content main-center">
+                    <a class="button-style" style="position: absolute; top: 5px; right: 5px" href="/admin/subject/add">Add subject</a>
+                    <h1>Subjects list</h1>
+                    <table id="datalist" class="table-style">
+                        <thead>
+                        <tr class="first-row">
+                            <td>Name</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each=" subject : ${subjects}">
+                            <td th:text="${subject.name}"></td>
+                            <td width="100px">
+                                <a th:href="@{/admin/subject/{id}/edit (id = ${subject.subjectId})}">edit</a>
+                                <a href="" th:onclick="'javascript:deleteEntity(\'' + ${subject.subjectId} + '\',\''+ 'subject' + '\');'">delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <hr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>

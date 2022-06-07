@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gradebook</title>
+
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!--               bootstrap                     -->
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css">
+    <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!--               spreadsheets                     -->
+    <link href="https://unpkg.com/tabulator-tables@4.9.3/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.min.js"></script>
+
+    <!--               JQuery                     -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <div th:insert="fragments/sidebar :: sidebar"></div>
+    </div>
+    <div id="page-content-wrapper">
+        <div id="page-content">
+            <div class="row">
+                <div class="col-md-12 main-content main-center">
+                    <label for="date">
+                        <input type="date" id="date" value="" name="trip-start">
+                    </label>
+                    <br>
+                    <br>
+                    <button onclick="insertColumnWithDate()">Add column</button>
+                    <button onclick="saveData()">Save</button>
+                    <br>
+                    <br>
+                    <div id="gradebook"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    let dates = /*[[${dates}]]*/ '';
+    let gradebooks = /*[[${gradebooks}]]*/ '';
+    let students = /*[[${students}]]*/ '';
+</script>
+<script type="text/javascript" th:src="@{/js/gradebook.js}"></script>
+</body>
+</html>
